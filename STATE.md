@@ -40,3 +40,4 @@
 - Stage 3b: s3 mix + 450 coconot noncomply teacher answers (data/train/s3b_fix.jsonl) from models/wren-s2 -> runs/s3b_fix, eval -> runs/eval_s3b.done. If 3b also fails: keep s2 as final (2nd failure of this stage => check in per brief).
 - 2026-09-27 FINAL: Stage 3b also failed keep rule (ALL 4.52<4.62, feedback 4.80, IFEval 0.447). Second failure of stage 3 -> final = Stage 2 model, now at models/wren (models/wren-s2 symlink). chat.py tested (thinking on/off). reports/REPORT.md written. Article v5 published. Spend $4.13/$19.
 - Open question for user: accept the IFEval -17pt regression, or spend more compute (on-policy DPO round, merged repair+constraint mix, SmolLM2 control).
+- 2026-09-27: article gallery (article/build_gallery.py). Repo committed + pushed public: https://github.com/patelvishwa112/raising-wren (GitHub push protection caught Stripe docs example key in a generated prompt; redacted).
