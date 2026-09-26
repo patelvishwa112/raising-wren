@@ -1,0 +1,13 @@
+{
+ "model": "models/wren-s1b",
+ "adapter": "runs/s2_repair",
+ "n": {
+  "arc": 300,
+  "gsm": 150,
+  "ifeval": 150
+ },
+ "arc_c_acc": 0.5,
+ "gsm8k_acc": 0.6,
+ "ifeval_prompt_strict": 0.41333333333333333,
+ "ifeval_inst_strict": 0.542016806722689
+}

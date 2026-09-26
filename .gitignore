@@ -1,0 +1,16 @@
+# secrets
+.env
+# environment / OS
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+# large or re-downloadable artifacts
+models/
+runs/*
+!runs/eval_stage.sh
+data/raw/
+# third-party web pages saved for reading (copyright of their owners)
+refs/
+# local scratch
+article/*.py.bak

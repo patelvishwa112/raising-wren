@@ -1,0 +1,13 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "adapter": "runs/s1_dpo",
+ "n": {
+  "arc": 300,
+  "gsm": 150,
+  "ifeval": 150
+ },
+ "arc_c_acc": 0.5266666666666666,
+ "gsm8k_acc": 0.5266666666666666,
+ "ifeval_prompt_strict": 0.47333333333333333,
+ "ifeval_inst_strict": 0.5798319327731093
+}

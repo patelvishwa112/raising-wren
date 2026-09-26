@@ -1,0 +1,13 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "adapter": "runs/s1b_sft",
+ "n": {
+  "arc": 300,
+  "gsm": 150,
+  "ifeval": 150
+ },
+ "arc_c_acc": 0.54,
+ "gsm8k_acc": 0.2733333333333333,
+ "ifeval_prompt_strict": 0.43333333333333335,
+ "ifeval_inst_strict": 0.5630252100840336
+}

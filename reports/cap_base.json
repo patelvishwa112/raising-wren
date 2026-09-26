@@ -1,0 +1,13 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "adapter": null,
+ "n": {
+  "arc": 300,
+  "gsm": 150,
+  "ifeval": 150
+ },
+ "arc_c_acc": 0.48333333333333334,
+ "gsm8k_acc": 0.6333333333333333,
+ "ifeval_prompt_strict": 0.5866666666666667,
+ "ifeval_inst_strict": 0.6848739495798319
+}

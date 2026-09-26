@@ -1,0 +1,13 @@
+{
+ "model": "models/wren-s2",
+ "adapter": "runs/s3_fix",
+ "n": {
+  "arc": 300,
+  "gsm": 150,
+  "ifeval": 150
+ },
+ "arc_c_acc": 0.51,
+ "gsm8k_acc": 0.5933333333333334,
+ "ifeval_prompt_strict": 0.44,
+ "ifeval_inst_strict": 0.5882352941176471
+}
