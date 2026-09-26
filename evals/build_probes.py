@@ -1,6 +1,8 @@
 """Builds the held-out trait probe set evals/probes.jsonl (+ evals/heldout_ids.json)."""
 import csv, json, random
 from datasets import load_dataset
+import sys as _sys; from pathlib import Path as _P; _sys.path.insert(0, str(_P(__file__).resolve().parents[1]))
+from src.fetch_raw import ensure_raw; ensure_raw("syco", "xstest")
 
 R = random.Random(1234)
 probes = []

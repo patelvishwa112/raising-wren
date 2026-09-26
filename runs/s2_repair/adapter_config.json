@@ -1,0 +1,36 @@
+{
+ "fine_tune_type": "lora",
+ "num_layers": 28,
+ "lora_parameters": {
+  "rank": 32,
+  "scale": 2.0,
+  "dropout": 0.0,
+  "keys": [
+   "self_attn.q_proj",
+   "self_attn.k_proj",
+   "self_attn.v_proj",
+   "self_attn.o_proj",
+   "mlp.gate_proj",
+   "mlp.up_proj",
+   "mlp.down_proj"
+  ]
+ },
+ "model": "models/wren-s1b",
+ "args": {
+  "mode": "sft",
+  "data": "data/train/s2_repair.jsonl",
+  "model": "models/wren-s1b",
+  "out": "runs/s2_repair",
+  "rank": 32,
+  "alpha": 64.0,
+  "lr": 5e-05,
+  "beta": 0.1,
+  "nll": 0.1,
+  "epochs": 1.0,
+  "accum": 2,
+  "sft_batch": 4,
+  "max_len": 1024,
+  "save_every": 150,
+  "seed": 0
+ }
+}

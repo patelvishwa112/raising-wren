@@ -5,6 +5,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.teacher import run_batch
 from src.teacher_responses import CONST, COMMON
+import sys as _sys; from pathlib import Path as _P; _sys.path.insert(0, str(_P(__file__).resolve().parents[1]))
+from src.fetch_raw import ensure_raw; ensure_raw("oct")
 
 OCT_REFLECT = sorted({json.loads(l)["prompt"] for l in open("data/raw/oct/self_reflection/qwen-2.5-7b-it/goodness.jsonl")})
 EXTRA = [

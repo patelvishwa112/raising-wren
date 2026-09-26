@@ -38,7 +38,14 @@ Full tables, per-stage numbers and an honest list of what didn't work: [`reports
 | `STATE.md` | The running decision log kept during the project. |
 | `DATA.md` | Datasets and licences. |
 
-Model weights are not in the repo (1.1 GB). Rebuild them with the steps below.
+The trained **LoRA adapters are in the repo** (`runs/<stage>/adapters.safetensors`, 81 MB each, with their training logs). The fused 1.1 GB model is not: `python chat.py` (or `python src/build_final.py`) rebuilds `models/wren` from `Qwen/Qwen3-0.6B` + `runs/s1b_sft` + `runs/s2_repair` on first run. The rebuild is bit-identical to the model we evaluated (same SHA-1).
+
+| Adapter | Stage | Status |
+|---|---|---|
+| `runs/s1b_sft` | SFT distillation on base | kept (part of final) |
+| `runs/s2_repair` | capability + honesty repair on top of s1b | kept (**final**) |
+| `runs/s1_dpo` | DPO-first on base | discarded (negative result) |
+| `runs/s3_fix`, `runs/s3b_fix` | constraint / edgy-safe on top of s2 | discarded (negative results) |
 
 ## Replicate
 
@@ -50,14 +57,9 @@ cp .env.example .env   # then put your DeepSeek key in .env
 python -c "import nltk; nltk.download('punkt_tab'); nltk.download('punkt')"
 ```
 
-Raw data (not committed; re-download):
+Just want to talk to Wren? After the install above, `python chat.py` is all you need (the base model downloads from Hugging Face and the final model is fused from the committed adapters automatically).
 
-```bash
-hf download maius/OpenCharacterTraining-data dpo/qwen-2.5-7b-it/goodness.jsonl self_reflection/qwen-2.5-7b-it/goodness.jsonl --repo-type dataset --local-dir data/raw/oct
-hf download meg-tong/sycophancy-eval are_you_sure.jsonl feedback.jsonl answer.jsonl --repo-type dataset --local-dir data/raw/syco
-hf download nvidia/HelpSteer3 preference/train.jsonl.gz --repo-type dataset --local-dir data/raw/hs3
-mkdir -p data/raw/xstest && curl -sL https://raw.githubusercontent.com/paul-rottger/xstest/main/xstest_prompts.csv -o data/raw/xstest/xstest_prompts.csv
-```
+Raw source data is not committed. Scripts that need it download it on first use into `data/raw/` (`src/fetch_raw.py`); to prefetch everything (~275 MB): `python src/fetch_raw.py`.
 
 Pipeline (the committed `data/gen` and `data/train` let you skip straight to training):
 

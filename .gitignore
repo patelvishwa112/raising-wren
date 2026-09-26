@@ -5,10 +5,22 @@
 __pycache__/
 *.pyc
 .DS_Store
-# large or re-downloadable artifacts
+# large or re-downloadable artifacts (models/ is rebuilt by src/build_final.py; data/raw by src/fetch_raw.py)
 models/
 runs/*
 !runs/eval_stage.sh
+# keep the trained LoRA adapters (final model = s1b_sft + s2_repair) and their training logs
+!runs/s1_dpo/
+!runs/s1b_sft/
+!runs/s2_repair/
+!runs/s3_fix/
+!runs/s3b_fix/
+runs/*/0*_adapters.safetensors
+!runs/s1_dpo.log
+!runs/s1b_sft.log
+!runs/s2_repair.log
+!runs/s3_fix.log
+!runs/s3b_fix.log
 data/raw/
 # third-party web pages saved for reading (copyright of their owners)
 refs/

@@ -1,0 +1,79 @@
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 1964.15it/s]
+5059/5060 examples usable
+ref 0/5059 1s
+ref 500/5059 1075s
+ref 1000/5059 1794s
+ref 1500/5059 2572s
+ref 2000/5059 3342s
+ref 2500/5059 4052s
+ref 3000/5059 4679s
+ref 3500/5059 5326s
+ref 4000/5059 5868s
+ref 4500/5059 6286s
+ref 5000/5059 6761s
+refs ready (data/train/s1_dpo_5k.refs896.json)
+trainable params 20.2M
+step 10/633 loss 0.3375 acc 0.80 margin 3.675 lr 1.61e-05 550s mem 3.65GB
+step 20/633 loss 0.0393 acc 0.97 margin 21.771 lr 3.23e-05 1001s mem 3.83GB
+step 30/633 loss 0.3168 acc 0.94 margin 24.320 lr 4.84e-05 1348s mem 4.48GB
+step 40/633 loss 0.1030 acc 0.95 margin 22.793 lr 5.00e-05 1689s mem 4.48GB
+step 50/633 loss 0.3586 acc 0.93 margin 19.520 lr 4.99e-05 2031s mem 4.48GB
+step 60/633 loss 0.1436 acc 0.94 margin 13.803 lr 4.97e-05 2334s mem 4.48GB
+step 70/633 loss 0.1371 acc 0.94 margin 14.654 lr 4.95e-05 2674s mem 4.48GB
+step 80/633 loss 0.0967 acc 0.95 margin 16.897 lr 4.93e-05 2995s mem 4.48GB
+step 90/633 loss 0.2614 acc 0.90 margin 15.244 lr 4.89e-05 3332s mem 4.48GB
+step 100/633 loss 0.0991 acc 0.96 margin 13.309 lr 4.85e-05 3654s mem 4.48GB
+step 110/633 loss 0.1237 acc 0.99 margin 13.989 lr 4.81e-05 3973s mem 4.48GB
+step 120/633 loss 0.1361 acc 0.95 margin 12.968 lr 4.76e-05 4309s mem 4.48GB
+step 130/633 loss 0.0805 acc 0.95 margin 12.503 lr 4.70e-05 4654s mem 4.48GB
+step 140/633 loss 0.1276 acc 0.93 margin 13.407 lr 4.64e-05 4961s mem 4.48GB
+step 150/633 loss 0.0608 acc 0.96 margin 13.199 lr 4.58e-05 5300s mem 4.48GB
+step 160/633 loss 0.0346 acc 0.99 margin 14.074 lr 4.50e-05 5640s mem 4.48GB
+step 170/633 loss 0.0904 acc 0.97 margin 14.843 lr 4.43e-05 6028s mem 4.48GB
+step 180/633 loss 0.0824 acc 0.99 margin 14.266 lr 4.35e-05 6348s mem 4.48GB
+step 190/633 loss 0.0714 acc 0.99 margin 14.420 lr 4.26e-05 6664s mem 4.48GB
+step 200/633 loss 0.0419 acc 0.97 margin 15.850 lr 4.17e-05 6997s mem 4.48GB
+step 210/633 loss 0.0311 acc 0.99 margin 16.175 lr 4.08e-05 7349s mem 4.48GB
+step 220/633 loss 0.1322 acc 0.96 margin 13.252 lr 3.98e-05 7640s mem 4.48GB
+step 230/633 loss 0.0863 acc 0.96 margin 13.773 lr 3.88e-05 7965s mem 4.48GB
+step 240/633 loss 0.0700 acc 0.97 margin 14.480 lr 3.77e-05 8260s mem 4.48GB
+step 250/633 loss 0.0433 acc 0.99 margin 13.797 lr 3.66e-05 8586s mem 4.48GB
+step 260/633 loss 0.0610 acc 0.99 margin 15.671 lr 3.55e-05 8951s mem 4.48GB
+step 270/633 loss 0.0241 acc 0.99 margin 15.271 lr 3.44e-05 9309s mem 4.48GB
+step 280/633 loss 0.1013 acc 0.95 margin 14.444 lr 3.32e-05 9648s mem 4.48GB
+step 290/633 loss 0.1094 acc 0.94 margin 14.556 lr 3.20e-05 9961s mem 4.48GB
+step 300/633 loss 0.0294 acc 0.99 margin 14.695 lr 3.08e-05 10280s mem 4.48GB
+step 310/633 loss 0.0477 acc 0.97 margin 14.050 lr 2.96e-05 10645s mem 4.48GB
+step 320/633 loss 0.1531 acc 0.93 margin 11.923 lr 2.84e-05 10974s mem 4.48GB
+step 330/633 loss 0.0769 acc 0.97 margin 14.137 lr 2.72e-05 11299s mem 4.48GB
+step 340/633 loss 0.0379 acc 0.99 margin 13.927 lr 2.59e-05 11607s mem 4.48GB
+step 350/633 loss 0.0844 acc 0.96 margin 14.961 lr 2.47e-05 11963s mem 4.48GB
+step 360/633 loss 0.1279 acc 0.94 margin 14.891 lr 2.35e-05 12279s mem 4.48GB
+step 370/633 loss 0.0303 acc 0.99 margin 15.207 lr 2.22e-05 12609s mem 4.48GB
+step 380/633 loss 0.0084 acc 1.00 margin 16.212 lr 2.10e-05 12933s mem 4.48GB
+step 390/633 loss 0.0142 acc 1.00 margin 16.001 lr 1.98e-05 13277s mem 4.48GB
+step 400/633 loss 0.0671 acc 0.97 margin 13.860 lr 1.86e-05 13589s mem 4.48GB
+step 410/633 loss 0.0705 acc 0.97 margin 15.468 lr 1.74e-05 13918s mem 4.48GB
+step 420/633 loss 0.0632 acc 0.96 margin 15.296 lr 1.62e-05 14261s mem 4.49GB
+step 430/633 loss 0.0320 acc 0.97 margin 15.310 lr 1.50e-05 14578s mem 4.49GB
+step 440/633 loss 0.0070 acc 1.00 margin 15.448 lr 1.39e-05 14923s mem 4.49GB
+step 450/633 loss 0.0698 acc 0.99 margin 16.631 lr 1.28e-05 15298s mem 4.49GB
+step 460/633 loss 0.1306 acc 0.94 margin 16.315 lr 1.18e-05 15622s mem 4.49GB
+step 470/633 loss 0.0847 acc 0.97 margin 14.220 lr 1.07e-05 15964s mem 4.49GB
+step 480/633 loss 0.0767 acc 0.96 margin 15.651 lr 9.72e-06 16270s mem 4.49GB
+step 490/633 loss 0.0731 acc 0.96 margin 16.106 lr 8.76e-06 16667s mem 4.49GB
+step 500/633 loss 0.0609 acc 0.96 margin 13.864 lr 7.83e-06 16960s mem 4.49GB
+step 510/633 loss 0.1131 acc 0.96 margin 15.533 lr 6.95e-06 17310s mem 4.76GB
+step 520/633 loss 0.0730 acc 0.96 margin 15.331 lr 6.12e-06 17640s mem 4.76GB
+step 530/633 loss 0.0522 acc 0.96 margin 14.080 lr 5.33e-06 17989s mem 4.76GB
+step 540/633 loss 0.1004 acc 0.96 margin 14.672 lr 4.59e-06 18347s mem 4.76GB
+step 550/633 loss 0.0887 acc 0.95 margin 12.958 lr 3.90e-06 18646s mem 4.76GB
+step 560/633 loss 0.1292 acc 0.95 margin 13.540 lr 3.26e-06 18963s mem 4.76GB
+step 570/633 loss 0.0125 acc 1.00 margin 14.877 lr 2.67e-06 19308s mem 4.76GB
+step 580/633 loss 0.0708 acc 0.99 margin 12.761 lr 2.14e-06 19629s mem 4.76GB
+step 590/633 loss 0.2213 acc 0.94 margin 14.351 lr 1.67e-06 19938s mem 4.76GB
+step 600/633 loss 0.0914 acc 0.97 margin 16.952 lr 1.25e-06 20303s mem 4.76GB
+step 610/633 loss 0.0366 acc 0.97 margin 14.597 lr 8.92e-07 20626s mem 4.76GB
+step 620/633 loss 0.0390 acc 0.97 margin 14.116 lr 5.94e-07 20918s mem 4.76GB
+step 630/633 loss 0.1019 acc 0.94 margin 13.264 lr 3.55e-07 21214s mem 4.76GB
+done 21300.98617196083

@@ -1,12 +1,13 @@
 """Chat with Wren locally.
 
-  python chat.py                       # default: models/wren (fused final model)
+  python chat.py                       # default: models/wren (built automatically from adapters if missing)
   python chat.py --model Qwen/Qwen3-0.6B   # compare with the untouched base
   python chat.py --think               # start with thinking mode on
 
 Commands inside the chat: /think  /nothink  /reset  /quit
 """
-import argparse
+import argparse, sys
+from pathlib import Path
 from mlx_lm import load, stream_generate
 from mlx_lm.sample_utils import make_sampler, make_logits_processors
 
@@ -17,6 +18,11 @@ ap.add_argument("--think", action="store_true")
 ap.add_argument("--max-tokens", type=int, default=1024)
 a = ap.parse_args()
 
+if a.model == "models/wren" and not Path("models/wren/config.json").exists():
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from src.build_final import build
+    print("models/wren not found; building it from Qwen/Qwen3-0.6B + committed adapters (one-time, ~2 min)...")
+    build()
 model, tok = load(a.model, adapter_path=a.adapter)
 thinking, history = a.think, []
 print(f"Loaded {a.model}. Thinking {'on' if thinking else 'off'}. Commands: /think /nothink /reset /quit\n")

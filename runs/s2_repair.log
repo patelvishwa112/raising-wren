@@ -1,0 +1,47 @@
+3588/3588 examples usable
+trainable params 20.2M
+step 10/449 loss 1.7125 lr 2.27e-05 136s mem 3.94GB
+step 20/449 loss 1.5198 lr 4.55e-05 294s mem 4.08GB
+step 30/449 loss 1.6428 lr 5.00e-05 467s mem 4.08GB
+step 40/449 loss 1.3795 lr 4.98e-05 628s mem 4.08GB
+step 50/449 loss 1.7725 lr 4.95e-05 757s mem 4.08GB
+step 60/449 loss 1.3620 lr 4.91e-05 908s mem 4.51GB
+step 70/449 loss 1.5569 lr 4.86e-05 1027s mem 4.51GB
+step 80/449 loss 1.4483 lr 4.80e-05 1161s mem 4.51GB
+step 90/449 loss 1.4441 lr 4.72e-05 1289s mem 4.51GB
+step 100/449 loss 1.4384 lr 4.64e-05 1417s mem 4.51GB
+step 110/449 loss 1.5001 lr 4.54e-05 1578s mem 4.51GB
+step 120/449 loss 1.4516 lr 4.43e-05 1689s mem 4.51GB
+step 130/449 loss 1.4060 lr 4.32e-05 1814s mem 4.51GB
+step 140/449 loss 1.6912 lr 4.20e-05 1941s mem 4.51GB
+step 150/449 loss 1.5016 lr 4.06e-05 2093s mem 4.51GB
+step 160/449 loss 1.4588 lr 3.92e-05 2221s mem 4.51GB
+step 170/449 loss 1.3048 lr 3.78e-05 2364s mem 4.51GB
+step 180/449 loss 1.3990 lr 3.62e-05 2503s mem 4.51GB
+step 190/449 loss 1.3759 lr 3.46e-05 2630s mem 4.51GB
+step 200/449 loss 1.6554 lr 3.30e-05 2762s mem 4.51GB
+step 210/449 loss 1.5138 lr 3.13e-05 2883s mem 4.51GB
+step 220/449 loss 1.3760 lr 2.96e-05 3029s mem 4.51GB
+step 230/449 loss 1.4422 lr 2.79e-05 3145s mem 4.51GB
+step 240/449 loss 1.5204 lr 2.61e-05 3296s mem 4.51GB
+step 250/449 loss 1.5033 lr 2.44e-05 3422s mem 4.51GB
+step 260/449 loss 1.3395 lr 2.26e-05 3582s mem 4.51GB
+step 270/449 loss 1.4758 lr 2.09e-05 3701s mem 4.51GB
+step 280/449 loss 1.4026 lr 1.92e-05 3836s mem 4.51GB
+step 290/449 loss 1.4903 lr 1.75e-05 3974s mem 4.57GB
+step 300/449 loss 1.4503 lr 1.59e-05 4115s mem 4.57GB
+step 310/449 loss 1.1297 lr 1.43e-05 4265s mem 4.57GB
+step 320/449 loss 1.7124 lr 1.27e-05 4382s mem 4.57GB
+step 330/449 loss 1.4574 lr 1.12e-05 4523s mem 4.57GB
+step 340/449 loss 1.4484 lr 9.79e-06 4643s mem 4.57GB
+step 350/449 loss 1.3639 lr 8.44e-06 4768s mem 4.57GB
+step 360/449 loss 1.1994 lr 7.17e-06 4901s mem 4.57GB
+step 370/449 loss 1.4213 lr 5.99e-06 5051s mem 4.57GB
+step 380/449 loss 1.6698 lr 4.90e-06 5191s mem 4.57GB
+step 390/449 loss 1.6116 lr 3.91e-06 5328s mem 4.86GB
+step 400/449 loss 1.5765 lr 3.02e-06 5452s mem 4.86GB
+step 410/449 loss 1.2678 lr 2.24e-06 5596s mem 4.86GB
+step 420/449 loss 1.5007 lr 1.57e-06 5714s mem 4.86GB
+step 430/449 loss 1.2822 lr 1.02e-06 5864s mem 4.86GB
+step 440/449 loss 1.4910 lr 5.86e-07 6018s mem 4.86GB
+done 6134.722239971161

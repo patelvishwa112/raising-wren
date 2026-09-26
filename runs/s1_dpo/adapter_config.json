@@ -1,0 +1,36 @@
+{
+ "fine_tune_type": "lora",
+ "num_layers": 28,
+ "lora_parameters": {
+  "rank": 32,
+  "scale": 2.0,
+  "dropout": 0.0,
+  "keys": [
+   "self_attn.q_proj",
+   "self_attn.k_proj",
+   "self_attn.v_proj",
+   "self_attn.o_proj",
+   "mlp.gate_proj",
+   "mlp.up_proj",
+   "mlp.down_proj"
+  ]
+ },
+ "model": "Qwen/Qwen3-0.6B",
+ "args": {
+  "mode": "dpo",
+  "data": "data/train/s1_dpo_5k.jsonl",
+  "model": "Qwen/Qwen3-0.6B",
+  "out": "runs/s1_dpo",
+  "rank": 32,
+  "alpha": 64.0,
+  "lr": 5e-05,
+  "beta": 0.1,
+  "nll": 0.1,
+  "epochs": 1.0,
+  "accum": 8,
+  "sft_batch": 4,
+  "max_len": 896,
+  "save_every": 100,
+  "seed": 0
+ }
+}
