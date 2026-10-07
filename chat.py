@@ -14,9 +14,17 @@ from mlx_lm.sample_utils import make_sampler, make_logits_processors
 ap = argparse.ArgumentParser()
 ap.add_argument("--model", default="models/wren")
 ap.add_argument("--adapter")
+ap.add_argument("--v2", action="store_true", help="Chat with Raising Wren 2.0 (Qwen/Qwen3-0.6B + runs/s4_full)")
 ap.add_argument("--think", action="store_true")
 ap.add_argument("--max-tokens", type=int, default=1024)
 a = ap.parse_args()
+
+if a.v2:
+    a.model = "Qwen/Qwen3-0.6B"
+    if not a.adapter:
+        a.adapter = "runs/s4_full"
+elif a.adapter and a.model == "models/wren":
+    a.model = "Qwen/Qwen3-0.6B"
 
 if a.model == "models/wren" and not Path("models/wren/config.json").exists():
     sys.path.insert(0, str(Path(__file__).resolve().parent))
