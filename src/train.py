@@ -64,9 +64,18 @@ def main():
     ap.add_argument("--sft-batch", type=int, default=4)
     ap.add_argument("--max-len", type=int, default=1024)
     ap.add_argument("--save-every", type=int, default=200)
+    ap.add_argument("--max-steps", type=int, default=None, help="Stop after max-steps (for smoke test)")
+    ap.add_argument("--eval-data", default=None, help="Path to held-out eval dataset (.jsonl)")
+    ap.add_argument("--eval-every", type=int, default=2000, help="Run eval on eval-data every N steps")
+    ap.add_argument("--eval-every-rows", type=int, default=None, help="Run eval on eval-data every N trained data rows")
     ap.add_argument("--seed", type=int, default=0)
     a = ap.parse_args()
     random.seed(a.seed); mx.random.seed(a.seed)
+    # Prevent MLX from hoarding inactive memory buffers in Apple unified RAM
+    try:
+        mx.set_cache_limit(256 * 1024 * 1024)
+    except Exception:
+        pass
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
 
     model, tok = load(a.model)
@@ -82,6 +91,16 @@ def main():
             if e:
                 data.append(e)
     print(f"{len(data)}/{len(rows)} examples usable", flush=True)
+
+    eval_data = []
+    if a.eval_data and Path(a.eval_data).exists():
+        eval_rows = [json.loads(l) for l in open(a.eval_data)]
+        for ex in eval_rows:
+            e = encode(tok, ex, ex["completion"], a.max_len)
+            if e:
+                eval_data.append(e)
+        eval_data.sort(key=lambda x: len(x[0]) + len(x[1]))
+        print(f"Loaded held-out eval dataset: {len(eval_data)}/{len(eval_rows)} usable examples (sorted by length)", flush=True)
 
     model.freeze()
     if a.mode == "dpo":  # reference log-probs with the frozen base, before LoRA is attached
@@ -124,6 +143,43 @@ def main():
     sched = optim.join_schedules([optim.linear_schedule(0.0, a.lr, max(1, steps_total // 20)),
                                   optim.cosine_decay(a.lr, steps_total)], [max(1, steps_total // 20)])
     opt = optim.AdamW(learning_rate=sched, weight_decay=0.0)
+
+    rows_per_step = a.accum * (a.sft_batch if a.mode == "sft" else 1)
+    eval_step_interval = (max(1, a.eval_every_rows // rows_per_step)) if a.eval_every_rows else a.eval_every
+    print(f"Eval configured: every {a.eval_every_rows} data rows ({eval_step_interval} optimization steps)" if a.eval_every_rows else f"Eval configured: every {eval_step_interval} steps", flush=True)
+
+    last_evaluated_step = -1
+
+    def run_eval(step_num):
+        nonlocal last_evaluated_step
+        if not eval_data or step_num == last_evaluated_step:
+            return
+        last_evaluated_step = step_num
+        rows_done = min(int(len(data) * a.epochs), step_num * rows_per_step)
+        print(f"\n--- Running Held-Out Evaluation at Step {step_num} ({rows_done:,} rows trained) ({len(eval_data)} samples) ---", flush=True)
+        tot_loss = 0.0
+        tot_tokens = 0
+        t_eval_start = time.time()
+        for idx in range(0, len(eval_data), 4):
+            chk = eval_data[idx:idx + 4]
+            sums, ns = batch_logps(model, chk)
+            mx.eval(sums, ns)
+            tot_loss += -sums.sum().item()
+            tot_tokens += ns.sum().item()
+            mx.clear_cache()
+            if (idx + 4) % 500 == 0 or idx + 4 >= len(eval_data):
+                print(f"  [Eval] {min(len(eval_data), idx + 4)}/{len(eval_data)} samples evaluated...", flush=True)
+        avg_l = tot_loss / max(1, tot_tokens)
+        eval_ppl = math.exp(min(20.0, avg_l))
+        eval_time = time.time() - t_eval_start
+        eval_record = {"step": step_num, "rows_trained": rows_done, "eval_loss": avg_l, "eval_ppl": eval_ppl, "tokens": tot_tokens, "time_s": eval_time}
+        print(f"[Eval Step {step_num} | {rows_done:,} Rows] Loss: {avg_l:.4f} | PPL: {eval_ppl:.2f} | Time: {eval_time:.1f}s", flush=True)
+        with open(out / "eval_results.jsonl", "a", encoding="utf-8") as f:
+            f.write(json.dumps(eval_record) + "\n")
+        print("-" * 65 + "\n", flush=True)
+
+    if eval_data:
+        run_eval(0)
     items = []
     ep = 0
     while len(items) < len(data) * a.epochs:
@@ -137,6 +193,8 @@ def main():
     acc_grads, acc_n, step, t0 = None, 0, 0, time.time()
     log = {"loss": 0.0, "acc": 0.0, "margin": 0.0, "n": 0}
     for ci, chunk in enumerate(chunks):
+        if a.max_steps and step >= a.max_steps:
+            break
         if a.mode == "dpo":
             i = chunk[0]; ch, rj = data[i]; ref_c, ref_r = refs[i]
             s_c = batch_logps(model, [ch])[0][0]; s_r = batch_logps(model, [rj])[0][0]
@@ -151,12 +209,14 @@ def main():
             (loss, _), g = vg(model, [data[i] for i in chunk])
         log["loss"] += loss.item(); log["n"] += 1
         acc_grads = g if acc_grads is None else tree_map_add(acc_grads, g)
+        mx.eval(acc_grads)
+        mx.clear_cache()
         acc_n += 1
         if acc_n == a.accum or ci == len(chunks) - 1:
             acc_grads = tree_scale(acc_grads, 1.0 / acc_n)
             opt.update(model, acc_grads); mx.eval(model.parameters(), opt.state)
             acc_grads, acc_n = None, 0; step += 1
-            if step % 10 == 0:
+            if step % 10 == 0 or (a.max_steps and step >= a.max_steps):
                 n = log["n"]
                 msg = f"step {step}/{steps_total} loss {log['loss']/n:.4f}"
                 if a.mode == "dpo":
@@ -166,6 +226,13 @@ def main():
                 mx.clear_cache()
             if step % a.save_every == 0:
                 save(model, out, f"{step:05d}_adapters.safetensors")
+            if eval_data and step > 0 and (step % eval_step_interval == 0 or (a.max_steps and step >= a.max_steps)):
+                run_eval(step)
+            if a.max_steps and step >= a.max_steps:
+                print(f"Reached max-steps limit ({a.max_steps}), ending smoke run gracefully.", flush=True)
+                break
+    if eval_data:
+        run_eval(step)
     save(model, out, "adapters.safetensors")
     print("done", time.time() - t0)
 

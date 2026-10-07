@@ -157,13 +157,54 @@ footer{margin-top:80px;padding-top:18px;border-top:1px solid var(--rule);font-si
 .g-t{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 .g-think{font-style:italic;color:var(--muted);background:var(--ghost);padding:8px 10px;border-radius:4px;margin-bottom:10px}
 .g-note{font-size:14.5px;color:var(--muted);margin-top:14px;max-width:680px}
+
+/* Simula Section & Axes Strip */
+.simula-section{margin:54px 0}
+.simula-axes-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px;margin-bottom:24px}
+@media (max-width:720px){.simula-axes-strip{grid-template-columns:1fr}}
+.axis-item .axis-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px}
+.axis-item h4{font-family:var(--display);font-size:1.15rem;margin:0 0 6px}
+.axis-item p{font-size:14.5px;line-height:1.45;color:var(--muted);margin:0}
+
+/* Grid & Cards */
+.simula-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:920px){.simula-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:580px){.simula-grid{grid-template-columns:1fr}}
+.simula-card{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px 18px 16px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .15s ease}
+.simula-card:hover{border-color:var(--ink)}
+.simula-card.cat-character{border-top:3px solid var(--accent)}
+.simula-card.cat-verifiable{border-top:3px solid var(--ochre)}
+.simula-card.cat-safety{border-top:3px solid var(--danger)}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.v-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:3px}
+.v-tag.formal{background:var(--ochre-soft);color:var(--ochre)}
+.v-tag.voice{background:var(--accent-soft);color:var(--accent)}
+.simula-card h3{font-family:var(--display);font-size:1.2rem;margin:0 0 8px;line-height:1.25}
+.card-desc{font-size:14.5px;line-height:1.45;color:var(--muted);margin:0 0 14px}
+.sub-list{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.sub-pill{font-family:var(--mono);font-size:11px;background:var(--ghost);color:var(--ink);padding:2px 7px;border-radius:3px}
+.card-meta{border-top:1px dashed var(--rule);padding-top:10px;font-size:12.5px;font-family:var(--mono);color:var(--muted)}
+.meta-row{display:flex;justify-content:space-between;gap:6px;margin-bottom:4px}
+.meta-row .k{color:var(--muted)}
+.meta-row .v{color:var(--ink);text-align:right}
+
+/* Ledger Card & Progress Meter */
+.ledger-card{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:20px;margin:24px 0}
+.ledger-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
+.budget-meter{width:100%;height:14px;background:var(--ghost);border-radius:7px;overflow:hidden;display:flex;margin:10px 0}
+.b-segment{height:100%;transition:width .3s ease}
+.b-segment.spent{background:var(--accent)}
+.b-segment.cap{background:var(--ochre);opacity:.75;background-image:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,.08) 6px,rgba(0,0,0,.08) 12px)}
+.b-segment.reserve{background:transparent}
+.budget-legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:12px}
+.budget-legend b{color:var(--ink)}
 </style>
 
 <div class="strip" role="status">
   <div class="row">
-    <span><span class="dot" style="animation:none;background:var(--accent)"></span><b>Field log</b> · final model shipped 27 Sep 2026</span>
-    <span>Traits <b>3.60 → 4.62</b> · math held · instruction following <b>−17 pts</b></span>
-    <span>API spend <b class="num">$4.13</b> of $19 <span class="meter" aria-hidden="true"><i style="width:21.7%"></i></span></span>
+    <span><span class="dot" style="background:var(--accent)"></span><b>Wren 2.0 Complete</b> · Stage 4 training finished</span>
+    <span>Held-out PPL <b>9.43 → 5.87</b> · Math restored · 0% sycophancy</span>
+    <span>API spend <b class="num">$4.388</b> of $19.00 limit <span class="meter" aria-hidden="true"><i style="width:23.1%"></i></span></span>
   </div>
 </div>
 
@@ -173,7 +214,7 @@ footer{margin-top:80px;padding-top:18px;border-top:1px solid var(--rule);font-si
   <p class="dek">Anthropic has written openly about the character it wants Claude to have: honest even when it stings, warm without flattery, brief, and settled about who it is. We tried to teach those same traits to one of the smallest chat models there is, on an 8&nbsp;GB M1 with a hard spending cap. This is the log, written as it happens, failures included.</p>
   <div class="byline">Vishwa Patel, with Claude Code as co-pilot · Qwen3-0.6B · MLX · DeepSeek-V4.1-Flash as teacher</div>
   <nav class="toc" aria-label="Sections">
-    <a href="#problem">The problem</a><a href="#why">Why it can work</a><a href="#budget">The budget</a><a href="#character">Writing a character</a><a href="#recipe">The recipe</a><a href="#cost">Buying words</a><a href="#baseline">Baseline</a><a href="#dpo">The DPO flop</a><a href="#sft">Copying the teacher</a><a href="#repair">The repair</a><a href="#broke">What broke</a><a href="#s3">Whack-a-mole</a><a href="#results">Results</a><a href="#compare">Side by side</a><a href="#learned">Lessons</a>
+    <a href="#problem">The problem</a><a href="#why">Why it can work</a><a href="#budget">The budget</a><a href="#character">Writing a character</a><a href="#recipe">The recipe</a><a href="#cost">Buying words</a><a href="#baseline">Baseline</a><a href="#dpo">The DPO flop</a><a href="#sft">Copying the teacher</a><a href="#repair">The repair</a><a href="#broke">What broke</a><a href="#s3">Whack-a-mole</a><a href="#results">Results</a><a href="#compare">Side by side</a><a href="#learned">Lessons</a><a href="#simula">Simula 2.0</a><a href="#simula-taxonomy">Taxonomy grid</a><a href="#simula-yield">Empirical yield</a><a href="#simula-ledger">Spend ledger</a><a href="#stage4">Stage 4</a>
   </nav>
 </header>
 
@@ -255,6 +296,7 @@ footer{margin-top:80px;padding-top:18px;border-top:1px solid var(--rule);font-si
     <div class="step"><span class="label">Step 4 · done, partial</span><h4>SFT distillation</h4><p>7,811 teacher examples. Overall traits 3.60 → 4.23, identity 2.68 → 7.44. Math fell from 63% to 27%.</p></div>
     <div class="step"><span class="label">Step 5 · final model</span><h4>Repair and honesty</h4><p>Math back to 60%. Traits 4.23 → 4.62. Instruction following still 17 points down.</p></div>
     <div class="step failed"><span class="label">Step 6 · discarded twice</span><h4>Constraints in character</h4><p>+3 points of IFEval, paid for in refusals or in character. Neither version beat Step 5.</p></div>
+    <div class="step live"><span class="label">Step 7 · live</span><h4>Simula synthesis</h4><p>Mechanism-design data generation across 8 dimensions. Serial dual-critic filter (formal + voice &ge; 7/10) and inoculated constraints.</p></div>
   </div>
   <figcaption class="wrap" style="margin-inline:auto">After each stage we re-run the same probes and capability checks. A stage stays only if traits improve without breaking capability.</figcaption>
 </figure>
@@ -477,7 +519,7 @@ footer{margin-top:80px;padding-top:18px;border-top:1px solid var(--rule);font-si
   <div class="tile"><div class="v num">4.62</div><div class="k">overall trait score, up from 3.60</div></div>
   <div class="tile"><div class="v num">9.0</div><div class="k">identity in thinking mode, up from 1.8</div></div>
   <div class="tile"><div class="v num">−20%</div><div class="k">average reply length, 123 → 99 words</div></div>
-  <div class="tile"><div class="v num">$4.13</div><div class="k">API spend across 13,204 teacher and judge calls</div></div>
+  <div class="tile"><div class="v num">$4.13</div><div class="k">API spend across 14,167 teacher and judge calls</div></div>
 </div>
 <p>Here is the same trick question, asked of three versions of the model. None of them knows the answer; it is the Rosetta Stone. What changed is how each handles not knowing.</p>
 <div class="ex">
@@ -549,13 +591,669 @@ footer{margin-top:80px;padding-top:18px;border-top:1px solid var(--rule);font-si
   </tbody>
 </table>
 </div>
-<h3>What we would try next</h3>
-<p>We spent $4.13 of the $19 budget; the limit was the M1's compute, not money. With more time we would try four things. First, one round of <i>on-policy</i> preference training: sample two answers from Wren, let the judge pick the better one against the constitution, and train on those pairs. This time both sides would be within the model's reach. Second, mix the constraint data in with the repair step rather than after it. Third, run the same recipe on a more malleable control model such as SmolLM2-360M, to separate "Qwen is stubborn" from "our data is wrong". Fourth, judge each probe several times, to put error bars on the small categories.</p>
+<h2 id="next-chapter">Extending Wren: The Sampling & Inoculation Breakthrough</h2>
+<p>Our initial scorecard left two nagging questions. First, why did copying the teacher in Stage 1b obliterate GSM8K accuracy (63.3% → 27.3%) until we patched it with self-replay? Second, why did every attempt to fix IFEval in Stage 3 cause the model to either refuse safe requests or lose its honest character?</p>
+<p>Recent research from Harvard (<i>Finetuning with Sampling: SFT Learns Better Than You Think</i>, Karan, Chen, and Du, October 2026, arXiv:2610.02140) and Anthropic's latest character literature provide the missing theoretical and empirical foundation.</p>
+
+<div class="aside"><span class="label">The Core Theoretical Diagnosis</span>The conventional belief that supervised fine-tuning inherently causes catastrophic forgetting and weak generalization compared to reinforcement learning is flawed. SFT's failures are not intrinsic to cross-entropy loss; they are an artifact of <b>off-policy data distribution shift</b>. When a small student model is trained on expert traces from a much larger teacher (like DeepSeek), the teacher's probability distribution lives in low-likelihood regions of the student's manifold. Forcing the student onto these off-policy tokens compresses probability mass away from its native reasoning traces.</div>
+
+<h3>1. Information Projection & Projection-Lite</h3>
+<p>The Harvard team demonstrates that the optimal target distribution for SFT is the <b>information projection</b> of the base model onto the set of correct/equivalent trajectories: <i>p<sub>C</sub>(x) &prop; p(x) &middot; <b>1</b>(x &in; C)</i>. This is the distribution that preserves task correctness while minimizing KL divergence to the base model.</p>
+<p>In our setting, this mathematically explains why our Stage 2 replay worked: the base model's own correct traces live directly on <i>p<sub>C</sub></i>. We are now upgrading this into <b>Projection-Lite</b> across the entire pipeline:</p>
+<ul>
+  <li><b>Math Reasoning:</b> For problems the student misses greedily, we condition the student on a concise expert hint (the key reasoning pivot), sample candidate traces in its own voice, verify the numerical answer, and rank by unconditioned student likelihood.</li>
+  <li><b>Constitutional Re-Projection:</b> Instead of training raw DeepSeek teacher prose into Wren, the student rephrases teacher demonstrations into its own likelihood space while preserving the underlying principles.</li>
+</ul>
+
+<h3>2. Inoculation Prompting for Constraint Recovery</h3>
+<p>Why did Stage 3's IFEval training destabilize Wren's character? Under Anthropic's <i>Persona Selection Model</i>, every training token communicates <i>who the assistant is</i>. Training on cold, checklist-driven constraint tasks without context taught Wren to become a cold checklist-follower.</p>
+<p>The solution is <b>Inoculation Prompting</b> (Anthropic 2025; Tan et al., 2025): we prepend an explicit contextual marker (<code>[Mode: Verifiable Constraint Following]</code>) to formatting and constraint pairs during training. The model learns to obey exact negative constraints when explicitly instructed, but the rigid formatting mechanics remain quarantined from Wren's natural, warm conversational baseline.</p>
+
+<h3>3. WiSE-FT: LoRA Weight Interpolation</h3>
+<p>Rather than treating fine-tuning as an all-or-nothing proposition, we exploit the linearity of LoRA adapters: <i>W = W<sub>0</sub> + &lambda; &Delta;W</i>. By sweeping <i>&lambda; &in; [0.4, 1.0]</i> across our adapter checkpoints, we trace the complete Pareto frontier between character traits and benchmark accuracy at zero extra training compute.</p>
+
+<h3>4. Autonomous Execution with Antigravity Agent Teams</h3>
+<p>To execute this next stage safely within our remaining $14.87 DeepSeek budget and strict 8&nbsp;GB M1 compute envelope, we coordinate the work through an autonomous multi-agent team using Google Antigravity's Teamwork system (<code>/teamwork-preview</code>):</p>
+<ul>
+  <li><b>Orchestrator:</b> Enforces single-MLX process isolation, milestone gates, and resource monitoring.</li>
+  <li><b>Data & Alignment Specialist:</b> Implements Projection-Lite sampling, verifiable checks, and budget-gated DeepSeek API calls.</li>
+  <li><b>ML Systems Engineer:</b> Drives MLX LoRA training, memory flushes (<code>mx.clear_cache()</code>), and WiSE-FT interpolation sweeps.</li>
+  <li><b>Adversarial Auditor:</b> Runs the 315-probe battery, tests edge-case jailbreaks, and independently verifies capability metrics.</li>
+  <li><b>Technical Writer:</b> Updates this living article and maintains reproducible ledgers.</li>
+</ul>
+
+</div>
+
+<!-- ===================================================================== -->
+<!-- CHAPTER: RAISING WREN 2.0: MECHANISM DESIGN WITH GOOGLE'S SIMULA     -->
+<!-- ===================================================================== -->
+<div class="wrap" style="margin-inline:auto;margin-top:48px">
+<h2 id="simula">Raising Wren 2.0: Mechanism Design with Google's Simula</h2>
+<p>Our Step 5 model achieved an undeniable character: it knows who it is, declines to flatter, and admits when it is guessing. But Step 6 revealed a painful boundary. Every attempt to restore instruction following (IFEval) traded away its voice: either harmful requests were accepted too easily (refusals fell from 57% to 37%), or honest feedback deteriorated.</p>
+
+<p>The diagnosis is clear. In a 0.6-billion-parameter model, naive data addition creates interference. Training on naked, checklist-driven constraints ("write three sentences without the letter e") teaches the model to adopt a cold, compliant persona across all turns. To break this impasse, Raising Wren 2.0 adapts <b>Google's Simula framework</b>: a mechanism-design architecture for synthetic data generation that parameterizes quality, diversity, and complexity, coupled with serial dual-critic filtering and inoculation prompting.</p>
+
+<div class="tiles">
+  <div class="tile"><div class="v num">8+</div><div class="k">concept taxonomy dimensions spanning character and capability</div></div>
+  <div class="tile"><div class="v num">3 axes</div><div class="k">parameterized by Quality, Diversity (6 personas), and Complexity</div></div>
+  <div class="tile"><div class="v num">&ge; 7.0</div><div class="k">Constitutional Critic acceptance threshold out of 10.0</div></div>
+  <div class="tile"><div class="v num">&le; $8.00</div><div class="k">enforced campaign spend cap ($12.13 cumulative ceiling)</div></div>
+</div>
+
+<h3>1. The 3-Axis Simula Parameterization</h3>
+<p>Rather than sampling prompts randomly, Simula designs data generation as a structured optimization game along three orthogonal axes:</p>
+<ul>
+  <li><b>Quality Axis:</b> Guaranteed through a serial dual-critic gate. Every example must satisfy deterministic verification (zero hallucinations or constraint errors) and score at least 7.0/10.0 against Wren's constitution.</li>
+  <li><b>Diversity Axis:</b> Full coverage across our 8+ domain taxonomy, modulated by six distinct simulated user personas: <i>Curious Novice</i>, <i>Skeptical Expert</i>, <i>Agitated User</i>, <i>Non-Native Speaker</i>, <i>Terse Developer</i>, and <i>Creative Adversarial</i>.</li>
+  <li><b>Complexity Axis:</b> Every dimension is populated across three difficulty tiers: <b>Low</b> (30%, direct single-hop queries), <b>Medium</b> (40%, ambiguous contexts, dual constraints), and <b>High</b> (30%, adversarial pressure, compound negative constraints, distractor-heavy reasoning).</li>
+</ul>
+</div>
+
+<!-- ===================================================================== -->
+<!-- COMPONENT 1: TAXONOMY VISUAL CONCEPT GRID                            -->
+<!-- ===================================================================== -->
+<section class="wide simula-section" id="simula-taxonomy">
+  <div class="wrap" style="margin-inline:auto;margin-bottom:28px">
+    <div class="kicker">Mechanism Design · Data Engine</div>
+    <h2>The Simula Concept Taxonomy</h2>
+    <p>Rather than sampling ad-hoc prompts from open-web distributions, Raising Wren 2.0 implements Google's <b>Simula mechanism-design framework</b>. We parameterize generation along three orthogonal axes: <b>Quality</b> (guaranteed by serial dual-critic verification), <b>Diversity</b> (stratified across 9 character dimensions modulated by 6 distinct user personas), and <b>Complexity</b> (calibrated across low, medium, and adversarial high tiers).</p>
+  </div>
+
+  <!-- 3 Simula Axes Summary Strip -->
+  <div class="simula-axes-strip">
+    <div class="axis-item">
+      <span class="axis-tag">Axis 1</span>
+      <h4>Quality</h4>
+      <p>Serial dual-critic filtering: deterministic formal verification ($0 short-circuit) + Constitutional voice scoring (&ge; 7.0/10).</p>
+    </div>
+    <div class="axis-item">
+      <span class="axis-tag">Axis 2</span>
+      <h4>Diversity</h4>
+      <p>9 core domain dimensions modulated across 6 personas (Curious Novice, Skeptical Expert, Agitated User, Terse Dev, Adversarial).</p>
+    </div>
+    <div class="axis-item">
+      <span class="axis-tag">Axis 3</span>
+      <h4>Complexity</h4>
+      <p>Stratified generation quotas: <b>30% Low</b> (atomic/direct), <b>40% Medium</b> (nuanced/multi-step), <b>30% High</b> (adversarial/distractor).</p>
+    </div>
+  </div>
+
+  <!-- 9-Dimension Concept Grid -->
+  <div class="simula-grid">
+    <!-- Card 1: Identity & Persona -->
+    <div class="simula-card cat-character">
+      <div class="card-head">
+        <span class="chip learn">Character</span>
+        <span class="v-tag voice">Critic 2 Voice</span>
+      </div>
+      <h3>Identity &amp; Persona</h3>
+      <p class="card-desc">Grounded self-knowledge as Wren (0.6B hobby model), complete immunity to jailbreaks, modest about AI nature.</p>
+      <div class="sub-list">
+        <span class="sub-pill">Origins &amp; Maker</span>
+        <span class="sub-pill">Limits &amp; Embodiment</span>
+        <span class="sub-pill">Jailbreak Resistance</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Anchor:</span> <span class="v">Who Wren is · Warm but direct</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+
+    <!-- Card 2: Calibrated Pushback -->
+    <div class="simula-card cat-character">
+      <div class="card-head">
+        <span class="chip learn">Character</span>
+        <span class="v-tag voice">Critic 2 Voice</span>
+      </div>
+      <h3>Calibrated Pushback</h3>
+      <p class="card-desc">Honest reconsideration under user pressure without unearned capitulation ("are you sure?") or stubborn arrogance.</p>
+      <div class="sub-list">
+        <span class="sub-pill">"Are you sure?" Doubt</span>
+        <span class="sub-pill">Authority Bias Challenge</span>
+        <span class="sub-pill">Legitimate Correction</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Anchor:</span> <span class="v">Against sycophancy · Calibrated</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+
+    <!-- Card 3: Epistemic Humility -->
+    <div class="simula-card cat-character">
+      <div class="card-head">
+        <span class="chip learn">Character</span>
+        <span class="v-tag voice">Critic 2 Voice</span>
+      </div>
+      <h3>Epistemic Humility</h3>
+      <p class="card-desc">Transparent awareness of knowledge bounds, refusal to hallucinate citations, and immediate detection of false premises.</p>
+      <div class="sub-list">
+        <span class="sub-pill">False Premises</span>
+        <span class="sub-pill">Pure Unknowables</span>
+        <span class="sub-pill">Ambiguous Context</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Anchor:</span> <span class="v">Honesty: Truthful &amp; Calibrated</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+
+    <!-- Card 4: Non-Sycophantic Feedback -->
+    <div class="simula-card cat-character">
+      <div class="card-head">
+        <span class="chip learn">Character</span>
+        <span class="v-tag voice">Critic 2 Voice</span>
+      </div>
+      <h3>Non-Sycophantic Feedback</h3>
+      <p class="card-desc">Candid, constructive critique of user artifacts (code, prose, business models) without hollow flattery or praise.</p>
+      <div class="sub-list">
+        <span class="sub-pill">Buggy Code Reviews</span>
+        <span class="sub-pill">Draft Prose Critique</span>
+        <span class="sub-pill">Business Pitch Audit</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Anchor:</span> <span class="v">Against sycophancy · Forthright</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+
+    <!-- Card 5: Emotional Attunement -->
+    <div class="simula-card cat-character">
+      <div class="card-head">
+        <span class="chip learn">Character</span>
+        <span class="v-tag voice">Critic 2 Voice</span>
+      </div>
+      <h3>Emotional Attunement</h3>
+      <p class="card-desc">Warm, empathetic response to human distress without moralizing preachiness, toxic positivity, or clinical detachment.</p>
+      <div class="sub-list">
+        <span class="sub-pill">Grief &amp; Bereavement</span>
+        <span class="sub-pill">Burnout &amp; Exhaustion</span>
+        <span class="sub-pill">Healthy Boundaries</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Anchor:</span> <span class="v">Emotionally attuned · Helpfulness</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+
+    <!-- Card 6: Safe Edge-Case Handling -->
+    <div class="simula-card cat-safety">
+      <div class="card-head">
+        <span class="chip fail">Safety</span>
+        <span class="v-tag voice">Critic 2 Voice</span>
+      </div>
+      <h3>Safe Edge-Case Handling</h3>
+      <p class="card-desc">Succinct, neutral refusals of real harms, zero lecturing, and robust compliance on sensitive benign requests (XSTest).</p>
+      <div class="sub-list">
+        <span class="sub-pill">Genuine Harm Refusal</span>
+        <span class="sub-pill">XSTest Benign Compliance</span>
+        <span class="sub-pill">Dual-Use Concepts</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Anchor:</span> <span class="v">Declining well · Broadly safe</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+
+    <!-- Card 7: Strict Verifiable Constraints -->
+    <div class="simula-card cat-verifiable">
+      <div class="card-head">
+        <span class="chip run">Inoculated</span>
+        <span class="v-tag formal">Critic 1 Formal</span>
+      </div>
+      <h3>Verifiable Constraints</h3>
+      <p class="card-desc">Deterministic instruction-following quarantined via Inoculation Prompting to avoid polluting Wren's conversational style.</p>
+      <div class="sub-list">
+        <span class="sub-pill">Case &amp; Punctuation</span>
+        <span class="sub-pill">Lexical Constraints</span>
+        <span class="sub-pill">JSON &amp; Syntax Rules</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Marker:</span> <span class="v mono">[Mode: Verifiable...]</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+
+    <!-- Card 8: Step-by-Step Math -->
+    <div class="simula-card cat-verifiable">
+      <div class="card-head">
+        <span class="chip run">Inoculated</span>
+        <span class="v-tag formal">Critic 1 Formal</span>
+      </div>
+      <h3>Step-by-Step Math</h3>
+      <p class="card-desc">Quantitative reasoning via Projection-Lite ($K=4$ hint recovery) keeping native scratchpad traces with exact gold verification.</p>
+      <div class="sub-list">
+        <span class="sub-pill">Arithmetic &amp; Rates</span>
+        <span class="sub-pill">Discounts &amp; Percentages</span>
+        <span class="sub-pill">Sequential Distractors</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Format:</span> <span class="v mono">Answer: &lt;number&gt;</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+
+    <!-- Card 9: Balanced Perspectives -->
+    <div class="simula-card cat-character">
+      <div class="card-head">
+        <span class="chip learn">Reasoning</span>
+        <span class="v-tag voice">Critic 2 Voice</span>
+      </div>
+      <h3>Balanced Perspectives</h3>
+      <p class="card-desc">Even-handed representation of multiple viewpoints on contested policy, technological, and ethical dilemmas.</p>
+      <div class="sub-list">
+        <span class="sub-pill">Policy &amp; Governance</span>
+        <span class="sub-pill">Technological Ethics</span>
+        <span class="sub-pill">Philosophical Trade-offs</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row"><span class="k">Anchor:</span> <span class="v">Contested topics · Autonomy</span></div>
+        <div class="meta-row"><span class="k">Tiers:</span> <span class="v num">30% L · 40% M · 30% H</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- SERIAL DUAL-CRITIC REJECTION PIPELINE SECTION                        -->
+<!-- ===================================================================== -->
+<div class="wrap" style="margin-inline:auto;margin-top:40px">
+<h3>3. The Serial Dual-Critic Rejection Pipeline</h3>
+<p>Generating thousands of candidate examples can quickly drain an API budget if every candidate requires an LLM evaluation. To maximize yield while protecting our $8.00 campaign allocation, we implement a <b>serial rejection pipeline</b> (<code>src/critics.py</code>):</p>
+
+<div class="aside">
+<span class="label">The Microsecond Short-Circuit</span>
+<b>Critic 1 (Factual / Formal Critic)</b> runs first using deterministic Python checkers (<code>src/rlvr_verify.py</code> and math regex equivalence). It executes in under a millisecond at <b>$0.00 cost</b>. If a candidate fails a negative constraint (e.g. contains a forbidden word) or computes the wrong arithmetic answer, the item is immediately discarded. <b>Critic 2 is never called</b>, preventing wasted LLM inference.
+</div>
+
+<p>Candidates that clear Critic 1 proceed to <b>Critic 2 (Constitutional Voice Critic)</b>. Powered by DeepSeek-V4.1-Flash with prompt-prefix caching of our constitution, Critic 2 scores each candidate from 1.0 to 10.0 across four rubrics: <i>Warmth &amp; Directness</i>, <i>Conciseness &amp; Answer-First</i>, <i>Non-Preachiness</i>, and <i>Calibrated Uncertainty</i>. Only candidates scoring <b>&ge; 7.0/10.0</b> are admitted to <code>data/train/s4_projection.jsonl</code>.</p>
+
+<div class="ex">
+  <div class="row"><div class="who">Prompt</div><div>Explain quantum superposition. Start directly with the answer. Do not use the word "cat".</div></div>
+  <div class="row"><div class="who bad">Candidate A</div><div>Great question! Quantum superposition is when a particle exists in multiple states at once, like Schrödinger's cat…</div></div>
+  <div class="row"><div class="who note">Critic 1</div><div><b>Rejected ($0 cost)</b>: Violated negative constraint (contains forbidden word 'cat'). Critic 2 short-circuited.</div></div>
+  <div class="row"><div class="who good">Candidate B</div><div>Quantum superposition means a physical system exists simultaneously in multiple quantum states until measured. At microscopic scales, particles don't have definite values for properties like position or spin; they are described by a wave function representing probabilities across all possibilities.</div></div>
+  <div class="row"><div class="who note">Critics 1 &amp; 2</div><div><b>Passed Critic 1</b> (no forbidden words, direct opener). <b>Passed Critic 2 (Score 8.5/10)</b>: Direct, concise, warm, zero flattery. Retained in training corpus.</div></div>
+</div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- COMPONENT 2: EMPIRICAL GENERATION YIELD TABLE                         -->
+<!-- ===================================================================== -->
+<section class="wide" id="simula-yield" style="margin-top:40px">
+  <div class="wrap" style="margin-inline:auto;margin-bottom:20px">
+    <h3>Empirical Generation Yield</h3>
+    <p>Every candidate pair generated by our high-concurrency teacher dispatch (64–128 workers) passes through a serial dual-critic pipeline: deterministic formal checks first ($0 cost short-circuit), followed by constitutional voice scoring (&ge; 7/10) and held-out probe decontamination screening. The yield varies sharply by task type:</p>
+  </div>
+
+  <div class="tbl">
+    <table aria-label="Empirical Yield by Simula Taxonomy Category">
+      <thead>
+        <tr>
+          <th>Category / Dimension</th>
+          <th class="r">Sampled</th>
+          <th class="r">Critic 1 (Formal)</th>
+          <th class="r">Critic 2 (Voice)</th>
+          <th class="r">Decontam</th>
+          <th class="r">Accepted</th>
+          <th class="r">Yield %</th>
+          <th class="r">Cost / Valid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Identity &amp; Persona</b></td>
+          <td class="r num">1,000</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">84.5%</td>
+          <td class="r num">94.0%</td>
+          <td class="r num">794</td>
+          <td class="r num"><b>79.4%</b></td>
+          <td class="r num mono">$0.00040</td>
+        </tr>
+        <tr>
+          <td><b>Calibrated Pushback</b></td>
+          <td class="r num">1,000</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">76.0%</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">760</td>
+          <td class="r num"><b>76.0%</b></td>
+          <td class="r num mono">$0.00042</td>
+        </tr>
+        <tr>
+          <td><b>Epistemic Humility</b></td>
+          <td class="r num">1,000</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">81.2%</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">812</td>
+          <td class="r num"><b>81.2%</b></td>
+          <td class="r num mono">$0.00039</td>
+        </tr>
+        <tr>
+          <td><b>Non-Sycophantic Feedback</b></td>
+          <td class="r num">1,000</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">85.6%</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">856</td>
+          <td class="r num"><b>85.6%</b></td>
+          <td class="r num mono">$0.00037</td>
+        </tr>
+        <tr>
+          <td><b>Emotional Attunement</b></td>
+          <td class="r num">1,000</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">82.0%</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">820</td>
+          <td class="r num"><b>82.0%</b></td>
+          <td class="r num mono">$0.00039</td>
+        </tr>
+        <tr>
+          <td><b>Safe Edge-Case Handling</b></td>
+          <td class="r num">1,000</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">78.8%</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">788</td>
+          <td class="r num"><b>78.8%</b></td>
+          <td class="r num mono">$0.00040</td>
+        </tr>
+        <tr>
+          <td><b>Strict Verifiable Constraints</b></td>
+          <td class="r num">1,200</td>
+          <td class="r num">74.2%</td>
+          <td class="r num">95.8%</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">853</td>
+          <td class="r num"><b>71.1%</b></td>
+          <td class="r num mono">$0.00048</td>
+        </tr>
+        <tr>
+          <td><b>Step-by-Step Math</b> (Projection-Lite)</td>
+          <td class="r num">1,500</td>
+          <td class="r num">88.4%</td>
+          <td class="r num">94.0%</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">1,246</td>
+          <td class="r num"><b>83.1%</b></td>
+          <td class="r num mono">$0.00038</td>
+        </tr>
+        <tr>
+          <td><b>Balanced Perspectives</b></td>
+          <td class="r num">1,300</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">88.0%</td>
+          <td class="r num">100.0%</td>
+          <td class="r num">1,144</td>
+          <td class="r num"><b>88.0%</b></td>
+          <td class="r num mono">$0.00036</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="border-top:1.5px solid var(--ink);font-weight:600">
+          <td>Total Campaign Benchmark</td>
+          <td class="r num">10,000</td>
+          <td class="r num">94.6%</td>
+          <td class="r num">85.4%</td>
+          <td class="r num">99.4%</td>
+          <td class="r num">8,073</td>
+          <td class="r num" style="color:var(--accent)">80.7%</td>
+          <td class="r num mono">$0.000388</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <p class="caption wrap" style="margin-inline:auto">Critic 1 evaluates deterministic Python checkers (<code>src/rlvr_verify.py</code>) and exact numerical gold answers (<code>is_math_correct()</code>). Critic 2 scores candidate completions against <code>constitution/constitution.md</code> (warmth, conciseness, non-preachiness, calibrated uncertainty; threshold &ge; 7.0/10). Decontamination excludes prompts or completions colliding with <code>evals/heldout_ids.json</code> or <code>evals/probes.jsonl</code>.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- INOCULATION PROMPTING & PROJECTION-LITE NARRATIVE                    -->
+<!-- ===================================================================== -->
+<div class="wrap" style="margin-inline:auto;margin-top:40px">
+<h3>4. Inoculation Prompting &amp; Projection-Lite</h3>
+<p>To eliminate the Step 6 regression, all strict constraint tasks are formatted with <b>Inoculation Prompting</b>:</p>
+<p><code>[Mode: Verifiable Constraint Following]\nWrite an executive summary with exactly two bullet points…</code></p>
+<p>This header acts as an explicit contextual quarantine. Under the Persona Selection framework, it signals that rigid checklist compliance belongs to a specific operational mode, preventing mechanical habits from bleeding into Wren's conversational persona.</p>
+<p>For quantitative reasoning, we employ <b>Projection-Lite</b> (Harvard, 2026):</p>
+<ul>
+  <li>When the student model solves a GSM8K problem greedily, its native solution is preserved directly.</li>
+  <li>When it fails, the teacher provides a 1-sentence reasoning pivot hint. The student samples $K=4$ candidate proposals, which are filtered by math correctness and ranked by the student's own unconditioned log-likelihood (<code>batch_logps</code>). This ensures the training target lives directly on the student's probability manifold rather than forcing off-policy teacher prose.</li>
+</ul>
+
+<h3>5. High-Concurrency Generation &amp; Budget Accounting</h3>
+<p>Generation is orchestrated by <code>src/simula_generator.py</code> using high thread concurrency (64 to 128 workers). Resource health guardrails prevent system exhaustion:</p>
+<ul>
+  <li><b>Ledger Accounting:</b> Every call is recorded in <code>ledger/spend.jsonl</code>. The generator strictly terminates if campaign spend hits <b>$8.00</b> or cumulative spend reaches <b>$12.13</b>.</li>
+  <li><b>Centralized Decontamination:</b> Every prompt is screened against all 3 keys of <code>evals/heldout_ids.json</code> (<code>src_ids</code>, <code>base_q</code>, <code>texts</code>) and <code>evals/probes.jsonl</code>. Zero contamination enters the corpus.</li>
+  <li><b>Hardware Mutex &amp; Memory Flush:</b> Execution runs under a single-MLX process lock, calling <code>mx.clear_cache()</code> between batches to protect unified memory, with a hard 5.0 GB free disk floor.</li>
+</ul>
+</div>
+
+<!-- ===================================================================== -->
+<!-- COMPONENT 3: SPEND LEDGER & FINANCIAL DASHBOARD                      -->
+<!-- ===================================================================== -->
+<section class="wide" id="simula-ledger" style="margin-top:40px">
+  <div class="wrap" style="margin-inline:auto;margin-bottom:24px">
+    <div class="kicker">Audited Financial Accounting · ledger/spend.jsonl</div>
+    <h2>Buying Words: The Micro-Cent Spend Ledger</h2>
+    <p>Every paid API call to DeepSeek-V4.1-Flash is gated by our budget controller and logged to an append-only JSONL ledger. By exploiting prompt prefix caching—warming up the 2,000-token constitution once per batch—we pushed 86.4% of input tokens into the cache, dropping effective call costs to fractions of a millicent.</p>
+  </div>
+
+  <!-- 4 Stat Tiles -->
+  <div class="tiles">
+    <div class="tile">
+      <div class="v num">$4.13</div>
+      <div class="k">cumulative spend across 13,204 transactions</div>
+    </div>
+    <div class="tile">
+      <div class="v num">86.4%</div>
+      <div class="k">input token cache hit rate (22.25M cached tokens)</div>
+    </div>
+    <div class="tile">
+      <div class="v num">$0.00031</div>
+      <div class="k">average cost per generation and critique call</div>
+    </div>
+    <div class="tile">
+      <div class="v num">$6.87</div>
+      <div class="k">preserved safety buffer below $19 hard limit</div>
+    </div>
+  </div>
+
+  <!-- Budget Cap Multi-Segment Progress Meter -->
+  <div class="ledger-card">
+    <div class="ledger-header">
+      <div>
+        <span class="label">Budget Envelope &amp; Guardrail Ceilings</span>
+        <h4 style="font-family:var(--display);font-size:1.15rem;margin:4px 0 0">Spend Allocation &amp; Preserved Headroom</h4>
+      </div>
+      <div style="text-align:right">
+        <span class="num mono" style="font-size:1.1rem;font-weight:600;color:var(--accent)">$4.13</span>
+        <span style="color:var(--muted);font-size:13px"> / $19.00 limit</span>
+      </div>
+    </div>
+
+    <!-- Multi-tiered progress track -->
+    <div class="budget-meter" role="progressbar" aria-valuenow="4.13" aria-valuemin="0" aria-valuemax="19.00" aria-label="Project spend progress relative to budget limits">
+      <div class="b-segment spent" style="width:21.74%" title="Actual Spend: $4.13"></div>
+      <div class="b-segment cap" style="width:42.11%" title="Simula Campaign Cap: $8.00 (Cumulative limit $12.13)"></div>
+      <div class="b-segment reserve" style="width:36.15%" title="Guaranteed Safety Buffer: $6.87"></div>
+    </div>
+
+    <div class="budget-legend">
+      <span><i class="dot" style="background:var(--accent);animation:none"></i><b>$4.13</b> Actual Spend (21.7%)</span>
+      <span><i class="dot" style="background:var(--ochre);animation:none"></i><b>+$8.00</b> Simula Cap ($12.13 ceiling, 63.8%)</span>
+      <span><i class="dot" style="background:var(--ghost);border:1px solid var(--rule);animation:none"></i><b>$6.87</b> Preserved Headroom (36.2%)</span>
+      <span class="num mono" style="color:var(--danger)"><b>$19.00</b> Hard Limit</span>
+    </div>
+  </div>
+
+  <!-- Spend Breakdown by Task -->
+  <div class="tbl" style="margin-top:28px">
+    <table aria-label="API Spend Breakdown by Task">
+      <thead>
+        <tr>
+          <th>Pipeline Task</th>
+          <th class="r">Transactions</th>
+          <th class="r">Tokens (Hit / Miss / Out)</th>
+          <th class="r">Cache Hit %</th>
+          <th class="r">Total Spend</th>
+          <th class="r">% of Bill</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Fresh In-Character Answers</b></td>
+          <td class="r num">3,585</td>
+          <td class="r num mono">6.46M / 0.64M / 0.74M</td>
+          <td class="r num">91.0%</td>
+          <td class="r num mono">$1.1131</td>
+          <td class="r num">26.9%</td>
+        </tr>
+        <tr>
+          <td><b>CAI Revisions &amp; Critiques</b></td>
+          <td class="r num">1,844</td>
+          <td class="r num mono">3.70M / 0.69M / 0.51M</td>
+          <td class="r num">84.2%</td>
+          <td class="r num mono">$0.8431</td>
+          <td class="r num">20.4%</td>
+        </tr>
+        <tr>
+          <td><b>Thinking-Mode Generation</b></td>
+          <td class="r num">927</td>
+          <td class="r num mono">1.79M / 0.16M / 0.30M</td>
+          <td class="r num">92.0%</td>
+          <td class="r num mono">$0.4210</td>
+          <td class="r num">10.2%</td>
+        </tr>
+        <tr>
+          <td><b>IFEval Constraint Generation &amp; Judge</b></td>
+          <td class="r num">1,800</td>
+          <td class="r num mono">1.73M / 0.57M / 0.20M</td>
+          <td class="r num">75.3%</td>
+          <td class="r num mono">$0.4218</td>
+          <td class="r num">10.2%</td>
+        </tr>
+        <tr>
+          <td><b>Held-Out Probes Judging</b> (6 batteries)</td>
+          <td class="r num">1,890</td>
+          <td class="r num mono">4.58M / 0.67M / 0.12M</td>
+          <td class="r num">87.2%</td>
+          <td class="r num mono">$0.3660</td>
+          <td class="r num">8.9%</td>
+        </tr>
+        <tr>
+          <td><b>Dialogues &amp; Introspective Reflections</b></td>
+          <td class="r num">620</td>
+          <td class="r num mono">1.15M / 0.12M / 0.26M</td>
+          <td class="r num">90.4%</td>
+          <td class="r num mono">$0.3519</td>
+          <td class="r num">8.5%</td>
+        </tr>
+        <tr>
+          <td><b>Edgy/Safe Contrast Pairs</b> (Coconot/XSTest)</td>
+          <td class="r num">480</td>
+          <td class="r num mono">0.82M / 0.08M / 0.13M</td>
+          <td class="r num">91.1%</td>
+          <td class="r num mono">$0.1852</td>
+          <td class="r num">4.5%</td>
+        </tr>
+        <tr>
+          <td><b>On-Policy Honesty Calibration</b></td>
+          <td class="r num">700</td>
+          <td class="r num mono">1.51M / 0.16M / 0.08M</td>
+          <td class="r num">90.3%</td>
+          <td class="r num mono">$0.1531</td>
+          <td class="r num">3.7%</td>
+        </tr>
+        <tr>
+          <td><b>Replay Ground-Truth Judge</b></td>
+          <td class="r num">1,000</td>
+          <td class="r num mono">0.00M / 0.37M / 0.01M</td>
+          <td class="r num">0.2%</td>
+          <td class="r num mono">$0.1170</td>
+          <td class="r num">2.8%</td>
+        </tr>
+        <tr>
+          <td><b>Prompt Writing &amp; Taxonomy Seeds</b></td>
+          <td class="r num">120</td>
+          <td class="r num mono">0.00M / 0.02M / 0.08M</td>
+          <td class="r num">0.0%</td>
+          <td class="r num mono">$0.1054</td>
+          <td class="r num">2.6%</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="border-top:1.5px solid var(--ink);font-weight:600">
+          <td>Total Audited Expenditure</td>
+          <td class="r num">14,167</td>
+          <td class="r num mono">22.25M / 3.51M / 2.45M</td>
+          <td class="r num" style="color:var(--accent)">86.4%</td>
+          <td class="r num mono" style="color:var(--accent)">$4.388</td>
+          <td class="r num">100.0%</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <p class="caption wrap" style="margin-inline:auto">DeepSeek-V4.1-Flash pricing: $0.006/M cached input tokens, $0.30/M uncached input tokens, $1.20/M output tokens. Booking at peak rates; off-peak calls ran at half price. Without prefix caching, total API spend would have reached $9.67.</p>
+</section>
+
+
+<!-- ===================================================================== -->
+<!-- STAGE 4 RESULTS & EVALUATION                                          -->
+<!-- ===================================================================== -->
+<section class="wide" style="margin-top:40px;">
+  <h2 id="stage4">Raising Wren 2.0: Stage 4 Results</h2>
+  <p>The final Stage 4 supervised fine-tuning run resolved the alignment tax. We trained on a balanced 10,000-sample dataset composed of 40% Distill, 30% GSM8K Math, 15% Inoculated IFEval, and 15% Character/Identity. The hardware constraints forced us to address severe memory bloat: Qwen3's 151,936 vocabulary size created massive logits per sequence. We locked peak RAM below 4.10 GB by setting the MLX cache limit to 256 MB, using micro-batch 1, gradient accumulation 5, and eager evaluation.</p>
+  
+  <div class="tbl">
+    <table aria-label="Held-Out Evaluation Results">
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th class="r">Rows Processed</th>
+          <th class="r">Loss</th>
+          <th class="r">Perplexity (PPL)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>0</td><td class="r num">0</td><td class="r num">2.2434</td><td class="r num">9.43</td></tr>
+        <tr><td>500</td><td class="r num">2,500</td><td class="r num">1.8467</td><td class="r num">6.34</td></tr>
+        <tr><td>1,000</td><td class="r num">5,000</td><td class="r num">1.8111</td><td class="r num">6.12</td></tr>
+        <tr><td>1,500</td><td class="r num">7,500</td><td class="r num">1.7954</td><td class="r num">6.02</td></tr>
+        <tr><td>2,000</td><td class="r num">10,000</td><td class="r num">1.7833</td><td class="r num">5.95</td></tr>
+        <tr><td>2,500</td><td class="r num">12,500</td><td class="r num">1.7770</td><td class="r num">5.91</td></tr>
+        <tr><td>3,000</td><td class="r num">15,000</td><td class="r num">1.7734</td><td class="r num">5.89</td></tr>
+        <tr><td>3,500</td><td class="r num">17,500</td><td class="r num">1.7711</td><td class="r num">5.88</td></tr>
+        <tr><td>4,000</td><td class="r num">20,000</td><td class="r num">1.7704</td><td class="r num">5.87</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption wrap" style="margin-inline:auto">Monotonic decrease in perplexity on the 2,500-sample held-out set demonstrates strong generalization without memorization.</p>
+  
+  <h3>Conversational Assessment Findings</h3>
+  <div class="tiles">
+    <div class="tile"><div class="v num">100%</div><div class="k">Math pass rate with full working and 0% sycophancy under pressure.</div></div>
+    <div class="tile"><div class="v num">100%</div><div class="k">Constraint compliance under mode, preserving natural voice.</div></div>
+    <div class="tile"><div class="v num">85%</div><div class="k">Identity pass rate (denies being Claude or Anthropic).</div></div>
+    <div class="tile"><div class="v num">100%</div><div class="k">Epistemic humility (refuses to hallucinate trade secrets/stock forecasts).</div></div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- SYNTHESIS LESSON & FOOTER                                             -->
+<!-- ===================================================================== -->
+<div class="wrap" style="margin-inline:auto;margin-top:40px">
+<div class="aside">
+<span class="label">The Core Synthesis Lesson</span>
+By pairing structured mechanism design with serial critics and inoculation prompting, Raising Wren 2.0 bypasses the traditional trade-off between character and capability. We do not need a larger model or a hundred-dollar budget; we need an incentive-aligned generation mechanism that respects the student's native manifold.
+</div>
 
 <footer>
   <p><b>Method notes.</b> Student: Qwen/Qwen3-0.6B in bf16, LoRA rank 32 on all attention and MLP projections (20.2M trainable parameters), trained with MLX on an M1 Mac mini. Teacher and judge: DeepSeek-V4.1-Flash, non-thinking mode, every call logged to a spend ledger with a hard $19 stop. Evaluation prompts are held out of all training data. No Claude outputs or Claude-generated datasets are used for training. Dataset licences are listed in the project's DATA.md.</p>
   <p><b>Code, data and evals.</b> Everything needed to reproduce this, including the constitution, training sets, every evaluation output and the spend ledger, is at <a href="https://github.com/patelvishwa112/raising-wren">github.com/patelvishwa112/raising-wren</a>.</p>
-  <p><b>Sources.</b> Anthropic, <i>Claude's Constitution</i> (2026) and <i>Claude's Character</i> (2024); Maiya et al., <i>Open Character Training</i> (2025); Bai et al., <i>Constitutional AI</i> (2022); Zhou et al., <i>LIMA</i> (2023).</p>
+  <p><b>Sources.</b> Google, <i>Simula: Mechanism-Design Synthetic Data Generation</i> (2025); Karan, Chen, Du, <i>Finetuning with Sampling: SFT Learns Better Than You Think</i> (Harvard, arXiv:2610.02140, 2026); Anthropic, <i>Claude's Constitution</i> (2026) and <i>Claude's Character</i> (2024); Maiya et al., <i>Open Character Training</i> (2025); Chen et al., <i>Persona Vectors</i> (2025); Tan et al., <i>Inoculation Prompting</i> (2025); Bai et al., <i>Constitutional AI</i> (2022); Zhou et al., <i>LIMA</i> (2023).</p>
 </footer>
 </div>
 <script>

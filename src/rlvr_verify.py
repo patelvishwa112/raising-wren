@@ -22,6 +22,19 @@ def _paras(t, splitter=r"\n\s*\*\*\*\s*\n"):
     return [p for p in re.split(splitter, t.strip()) if p.strip()]
 
 
+def _count_sentences(t):
+    """Counts sentences ending in [.!?] in O(N) linear time, avoiding ReDoS backtracking."""
+    count = 0
+    in_text = False
+    for ch in t:
+        if ch not in ".!?":
+            in_text = True
+        elif in_text:
+            count += 1
+            in_text = False
+    return count
+
+
 def verify(text, gt):
     g = json.loads(gt) if isinstance(gt, str) else gt
     f, t = g["func_name"], text.strip()
@@ -67,7 +80,7 @@ def verify(text, gt):
     if f == "validate_word_constraint":
         return _cmp(len(_words(t)), N, q)
     if f == "verify_sentence_constraint":
-        return _cmp(len(re.findall(r"[^.!?]+[.!?]", t)), N, q)
+        return _cmp(_count_sentences(t), N, q)
     if f == "verify_paragraph_count":
         return len(_paras(t)) == N
     if f == "validate_paragraphs":

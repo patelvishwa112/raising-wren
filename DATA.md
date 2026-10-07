@@ -17,3 +17,10 @@
 No Claude-generated datasets or Claude API outputs are used as training data.
 
 Derived data in `data/gen` and `data/train` inherits the most restrictive upstream licence it contains: sets including OpenCharacterTraining prompts are CC BY-NC-SA 4.0 (non-commercial, share-alike).
+
+Stage 4 unified training dataset (`data/train/s4_10k.jsonl`, 10,000 rows):
+- 4,000 rows (40%): General helpful / replay (distillation from HelpSteer3 CC-BY-4.0 & OpenCharacterTraining CC BY-NC-SA 4.0).
+- 3,000 rows (30%): Math reasoning (openai/gsm8k train split MIT, base student greedy replay + Wren succinct character rewrites).
+- 1,500 rows (15%): Inoculated constraint following (allenai/RLVR-IFeval ODC-BY, wrapped with `[Mode: Verifiable Constraint Following]\n`).
+- 1,500 rows (15%): Character, pushback & identity (Simula 9-domain taxonomy + calibrated honesty/pushback pairs).
+- Zero contamination against `evals/heldout_ids.json` and `evals/probes.jsonl`.

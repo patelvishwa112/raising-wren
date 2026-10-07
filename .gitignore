@@ -2,6 +2,7 @@
 .env
 # environment / OS
 .venv/
+.agents/
 __pycache__/
 *.pyc
 .DS_Store
@@ -15,12 +16,15 @@ runs/*
 !runs/s2_repair/
 !runs/s3_fix/
 !runs/s3b_fix/
+!runs/s4_full/
 runs/*/0*_adapters.safetensors
 !runs/s1_dpo.log
 !runs/s1b_sft.log
 !runs/s2_repair.log
 !runs/s3_fix.log
 !runs/s3b_fix.log
+!runs/s4_full.log
+!runs/*.sh
 data/raw/
 # third-party web pages saved for reading (copyright of their owners)
 refs/
